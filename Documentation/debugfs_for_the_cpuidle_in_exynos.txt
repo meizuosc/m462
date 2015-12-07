@@ -1,0 +1,59 @@
+	Debug fs for the cpuidle with Exynos
+
+Gyeongtaek Lee (gt82.lee@samsung.com)
+
+1. What it does?
+This debug file system shows the duration and ratio of each cpuidle state.
+
+2. How to use
+
+2.1. Enabling the debug fs.
+(1) Configure the kernel source to default configuration
+$ make tg4_dvt_wqxga_android_defconfig
+(2) Change define to enable the debug fs
+Modify the following in arch/arm/mach-exynos/cpuidle.c
+#undef CPUIDLE_PROFILING ==> #define CPUIDLE_PROFILING
+(3) Build and download the kernel.
+
+2.2. Viewing the profiling result.
+(1) Turn the device on and access the terminal.
+(2) Change directory to the debug fs for cpuidle.
+$ cd /sys/kernel/debug/cpuidle
+
+2.2.1 C1 state
+(1) Reset timer for c1 state.
+# echo "" > c1
+[ 2401.414429] [L0] Duration is reset to 0
+(2) view duration and ratio of c1 state after some time.
+# cat c1
+total=    2.019876875, duration=    1.981639000, duration/total=50%
+total=    2.019918666, duration=    1.309011000, duration/total=50%
+total=    2.019926500, duration=    0.000000000, duration/total=0%
+total=    2.019933708, duration=    1.978745000, duration/total=50%
+
+2.2.2 C2 state
+(1) Reset timer for c2 state.
+# echo "" > c2
+[ 2409.929409] [L0] Duration is reset to 0
+(2) view duration and ratio of c2 state after some time.
+# cat c2
+total=    2.739918792, duration=    0.000000000, duration/total=0%
+total=    2.739964209, duration=    0.000000000, duration/total=0%
+total=    2.739971334, duration=    0.000000000, duration/total=0%
+total=    2.739978125, duration=    0.000000000, duration/total=0%
+
+2.2.3 AFTR state
+(1) Reset timer for AFTR state.
+# echo "" > c3_aftr
+[ 2427.934425] [L0] Duration is reset to 0
+(2) view duration and ratio of AFTR state after some time.
+# cat c3_aftr
+total=    3.399887417, duration=    0.000000000, duration/total=0%
+
+2.2.4 LPA state
+(1) Reset timer for LPA state.
+# echo "" > c3_lpa
+[ 2440.414413] [L0] Duration is reset to 0
+(2) view duration and ratio of LPA state after some time.
+# cat c3_lpa
+total=    2.509858250, duration=    0.000000000, duration/total=0%

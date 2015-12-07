@@ -1,0 +1,17 @@
+#
+# ARM CPU Frequency scaling drivers
+#
+
+config PRE_HISPEED
+	bool "Pre Hispeed"
+	help
+	  This provide with the pre-hispeed to bump to
+
+	  If in doubt, say N.
+
+config DOWN_DELAY
+	bool "Delay for scale down"
+	help
+	  This provide with the tunable parameter for delay time of scaling down
+
+	  If in doubt, say N.

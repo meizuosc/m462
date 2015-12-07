@@ -1,0 +1,382 @@
+/*
+ * MEIZU M76 Base on Exynos5430 SoC pin-mux and pin-config device tree source
+ *
+ * Copyright (c) 2014 Meizu Technology Co., Ltd.
+ *		http://www.meizu.com
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+*/
+
+/ {
+	/*GPA0...GPA3*/
+	pinctrl@10580000 {
+
+		/*GPA0*/
+		muic_int: muic_int {
+			samsung,pins = "gpa0-0";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <3>; /*pull up*/
+		};
+		charger_int: charger_int {
+			samsung,pins = "gpa0-7";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <3>; /*pull up*/
+		};
+		id_irq: id-irq {
+                        samsung,pins = "gpa0-4";
+                        samsung,pin-function = <0>; /* input */
+                        samsung,pin-pud = <0>;  /* none pull*/
+                };
+		cp_wdt_irq: cp_wdt_irq {
+                        samsung,pins = "gpa0-6";
+                        samsung,pin-function = <0xf>;
+                        samsung,pin-pud = <3>;  /* pull up */
+                };
+
+		/*GPA1*/
+		tfa9890_irq: tfa9890-irq {
+			samsung,pins = "gpa1-0";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <3>;
+		};
+		pmic_irq: pmic-irq {
+			samsung,pins = "gpa1-1";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <3>;
+		};
+		gpio_keys_irq: gpio_keys_irq {
+			samsung,pins =	"gpa0-1", /* HOME  */
+					"gpa1-2", /* VOL-  */
+					"gpa2-3", /* POWER */
+					"gpa2-6", /* VOL+  */
+					"gpa3-6"; /* HALL */
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+		};
+		es705_irq: es705-irq {
+			samsung,pins = "gpa1-5";
+			samsung,pin-function = <0xF>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+		};
+		bt_host_wake: bt-host-wake {
+			samsung,pins = "gpa1-6";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <0>; /* none pull */
+			samsung,pin-drv = <0>;
+		};
+		wm8998_irq: wm8998-irq {
+			samsung,pins = "gpa1-7";
+			samsung,pin-function = <0xF>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+		};
+
+		tp_irq: tp_irq {
+			samsung,pins = "gpa2-2";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <0x3>;
+			samsung,pin-drv = <0>;
+		};
+
+		/*GPA2*/
+		ix_irq_gpio: ix_irq_gpio {
+			samsung,pins = "gpa2-1";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <0x3>;
+			samsung,pin-drv = <0>;
+		};
+
+		gx_irq_gpio: gx_irq_gpio {
+			samsung,pins = "gpa2-1";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <0x3>;
+			samsung,pin-drv = <0>;
+		};
+
+		gx_output_hight: gx_output_hight {
+			samsung,pins = "gpa2-1";
+			samsung,pin-function = <0x1>;
+			samsung,pin-pud = <0x3>;
+			samsung,pin-val = <1>;
+		};
+
+
+		gx_output_low: gx_output_low {
+			samsung,pins = "gpa2-1";
+			samsung,pin-function = <0x1>;
+			samsung,pin-pud = <0x3>;
+			samsung,pin-val = <0>;
+		};
+
+		light_irq: light_irq {
+            samsung,pins = "gpa2-4";
+            samsung,pin-function = <0xf>;
+            samsung,pin-pud = <0x3>;
+            samsung,pin-drv = <0>;
+        };  
+
+
+		/*GPA3*/
+		hdmi_hdmi_hpd: hdmi_hdmi_hpd {
+			samsung,pins = "gpa3-0";
+			samsung,pin-function = <3>;
+			samsung,pin-pud = <1>;
+			samsung,pin-drv = <0>;
+		};
+		hdmi_ext_hpd: hdmi_ext_hpd {
+			samsung,pins = "gpa3-0";
+			samsung,pin-function = <15>;
+			samsung,pin-pud = <1>;
+			samsung,pin-drv = <0>;
+		};
+
+        ps_irq: ps_irq {
+            samsung,pins = "gpa3-3";
+            samsung,pin-function = <0xf>;
+            samsung,pin-pud = <0x3>;
+            samsung,pin-drv = <0>;
+        };
+		cp_ast_irq: cp_ast_irq {
+                        samsung,pins = "gpa3-4";
+                        samsung,pin-function = <0xf>;
+                        samsung,pin-pud = <3>;  /* pull up */
+                };
+
+
+	};
+
+	/*GPV6*/
+	pinctrl@10FE0000 {
+		pm_wrsti: pm-wrsti {
+			/* Warm reset information from AP */
+			samsung,pins = "gpv6-0";
+			samsung,pin-con-pdn = <3>;
+		};
+	};
+	
+	/*GPV7, GPB0, GPC0...GPC3, GPG0, GPD0...GPD8, GPF0...GPF5, GPG0...GPG3*/
+	pinctrl@14CC0000 {	
+		/*GPV7*/
+		bt_ct2: bt_ct2 {
+			samsung,pins = "gpv7-1";
+			samsung,pin-function = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <0>; /* output 0 */
+		};
+		wm8998_ldoena: wm8998-ldoena {
+			samsung,pins = "gpv7-4";
+			samsung,pin-function = <1>; /* output */
+			samsung,pin-pud = <0>; /* disable pull-up/down */
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+
+		#if 0
+		/*GPC0*/
+		fimc_is_flash: fimc-is-flash {
+			//samsung,pins = "gpc0-3", "gpc0-2";
+			/* FLASH_TORCH, FLASH_STROBE, FLASH_HWEN */
+			samsung,pins = "gpc0-3", "gpc0-2", "gpc0-4";
+			samsung,pin-function = <2>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+		};
+		#else
+		torch_temp: torch-temp {
+			samsung,pins = "gpc0-3";
+			samsung,pin-function = <0>; /* input */
+			samsung,pin-pud = <0>; /* disable pull-up/down */
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		#endif
+
+		st_hub_reset: st_hub_reset {
+			samsung,pins = "gpc0-6";
+			samsung,pin-pud = <0x3>;
+		};  
+
+		slave_wakeup:slave_wakeup {
+			samsung,pins = "gpc3-4";
+			samsung,pin-function = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		cp_bootup: cp_bootup {
+			samsung,pins = "gpc3-5";
+			samsung,pin-function = <0xF>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		cp_hsic_rdy:cp_hsic_rdy {
+			samsung,pins = "gpc3-6";
+			samsung,pin-function = <0>;
+			samsung,pin-pud = <3>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		ap_hsic_rdy:ap_hsic_rdy {
+			samsung,pins = "gpc3-7";
+			samsung,pin-function = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+
+		es705_wakeup: es705-wakeup {
+			samsung,pins = "gpd0-1";
+			samsung,pin-function = <1>; /* output */
+			samsung,pin-pud = <0>; /* disable pull-up/down */
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>;
+		};
+
+		st_hub_irq: st_hub_irq {
+			samsung,pins = "gpa3-5";
+			samsung,pin-function = <0xf>;
+			samsung,pin-pud = <0x3>;
+			samsung,pin-drv = <0>;
+		};  
+
+		nfc_spi_reset: nfc_spi_reset {
+			samsung,pins = "gpf1-7";
+			samsung,pin-funcion = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		/*GPF3*/
+		nfc_reset: nfc_reset {
+			samsung,pins = "gpf3-3";
+			samsung,pin-funcion = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		/*GPF4*/
+		cp_pwr_on: cp_pwr_on {
+			samsung,pins = "gpf4-1";
+			samsung,pin-funcion = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		ap_rst_cp: ap_rst_cp {
+			samsung,pins = "gpf4-3";
+			samsung,pin-funcion = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		nfc_dl_req: nfc_dl_req {
+			samsung,pins = "gpf4-4";
+			samsung,pin-funcion = <1>;
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		/*GPG1*/
+		tfa9890_reset: tfa9890-reset {
+			samsung,pins = "gpg1-4";
+			samsung,pin-function = <1>; /* output */
+			samsung,pin-pud = <0>; /* disable pull-up/down */
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>;
+		};
+		/*GPG3*/
+		es705_reset: es705-reset {
+			samsung,pins = "gpg3-2";
+			samsung,pin-function = <1>; /* output */
+			samsung,pin-pud = <0>; /* disable pull-up/down */
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>;
+		};
+		bt_ct1: bt_ct1 {
+			samsung,pins = "gpg3-4";
+			samsung,pin-function = <1>; /* output */
+			samsung,pin-pud = <0>; /* disable pull-up/down */
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+		wm8998_reset: wm8998-reset {
+			samsung,pins = "gpg3-5";
+			samsung,pin-function = <1>; /* output */
+			samsung,pin-pud = <0>; /* disable pull-up/down */
+			samsung,pin-drv = <0>;
+			samsung,pin-con-pdn = <3>; /* previous state */
+		};
+	};
+
+	/* GPR2, GPR3 */
+	pinctrl@15690000 {
+		gpio_wl_sfn_off: gpio-wl-sfn-off {
+			samsung,pins = "gpr2-0",
+						"gpr2-1",
+						"gpr3-0",
+						"gpr3-1",
+						"gpr3-2",
+						"gpr3-3";
+			samsung,pin-function = <0>; /* input */
+			samsung,pin-pud = <0>;
+			samsung,pin-drv = <0>;
+		};
+	};
+
+
+	/************************************************************************/
+	/***********************below for fixed regulators***********************/
+	/************************************************************************/
+
+	bl_5v: fixedregulator@2 {
+		compatible = "regulator-fixed";
+		regulator-name = "BACKLIGHT_5V";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&gpf1 0 1>;
+		enable-active-high;
+	};
+
+	lcd_vsp_5v: fixedregulator@3 {
+		compatible = "regulator-fixed";
+		regulator-name = "lcd-vsp-5v";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&gpf5 7 1>;
+		enable-active-high;
+	};
+
+	lcd_vsn_5v: fixedregulator@4 {
+		compatible = "regulator-fixed";
+		regulator-name = "lcd-vsn-5v";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&gpf5 6 1>;
+		enable-active-high;
+	};
+
+	lcd_vcc_5v: fixedregulator@5 {
+		compatible = "regulator-fixed";
+		regulator-name = "lcd-vcc-5v";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&gpf3 0 1>;
+		enable-active-high;
+	};
+
+	lcd_nvcc_5v: fixedregulator@6 {
+		compatible = "regulator-fixed";
+		regulator-name = "lcd-nvcc-5v";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&gpf3 1 1>;
+		enable-active-high;
+	};
+};

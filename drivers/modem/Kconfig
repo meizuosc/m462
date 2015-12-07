@@ -1,0 +1,72 @@
+#
+# Near Field Communication (NFC) devices
+#
+menuconfig LTE_MODEM
+	tristate "Meizu 4G-LTE modem support"
+	---help---
+	  Meizu 4G-LTE modem device
+
+if LTE_MODEM
+
+config NEZHA_HSIC_LINK
+	tristate "Marvell nezha modem hsic serial driver"
+	depends on USB_SERIAL && USB_EHCI_S5P
+	help
+	  This enables the NEZHA modem CDC-ACM serial driver. Select this if
+	  you make sure PXA1802 NEZHA modem connected to M76 board with HSIC.
+
+	  If unsure, say N.
+
+config NEZHA_HSIC_LINK_PM
+	tristate "PM with GPIOs for HSIC USB autosuspend"
+	depends on NEZHA_HSIC_LINK
+	help
+	  This enables HSIC-USB autosuspend and resume driver between s5p-ehci
+	  and nezha modem. Make sure usb states(L0/L2/L3) and GPIOs.
+
+	  If unsure, say N.
+
+config NEZHA_WUKONG_LOAD
+	tristate "nezha modem firmware download driver"
+	depends on NEZHA_HSIC_LINK
+	help
+	  This adds nezha modem firmware download driver for flashless case
+	  PXA1802.
+
+	  If unsure, say N.
+
+config TTY_MUX_TS0710
+	tristate "TS07.10 tty mux driver"
+	depends on NEZHA_HSIC_LINK
+	help
+	  This enables tty mux driver for nezha hsic serial device by ldisc.
+	  The mux ldisc driver is followed by 3GPP TS07.10.
+
+	  If unsure, say N.
+
+config NEZHA_AUDIO_STUB
+	tristate "nezha audio control client driver"
+	depends on NEZHA_HSIC_LINK
+	help
+	  This adds audio stub client driver to connect modem audio server.
+
+	  If unsure, say N.
+
+config NEZHA_NZNET
+	tristate "nezha net ldisc driver"
+	depends on NEZHA_HSIC_LINK
+	help
+	  This adds net interface ldisc driver for nezha modem.
+
+	  If unsure, say N.
+
+config NEZHA_GADGET_LDISC
+	tristate "nezha gadget ldsic driver"
+	depends on NEZHA_HSIC_LINK
+	help
+	  This adds gadget ldisc channel for marvell_modem and marvell_diag
+	  gadget driver for modem tracelog.
+
+	  If unsure, say N.
+
+endif

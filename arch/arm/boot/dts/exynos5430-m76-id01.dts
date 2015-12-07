@@ -1,0 +1,86 @@
+/*
+ * MEIZU M76 board device tree source
+ *
+ * Copyright (c) 2014 Meizu Technology Co., Ltd.
+ *              http://www.meizu.com
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * board id support 4bit: 0000 and 0001
+ * board version support: v2 v3 v3 v5 v6
+*/
+
+
+/dts-v1/;
+#include "exynos5430-m76.dtsi"
+
+/{
+	wm8998_i2c@1a {
+		compatible = "i2c-gpio";
+		gpios = <&gpg2 4 0 /* sda */
+			&gpb0 3 0 /* scl */>;
+		i2c-gpio,delay-us = <2>;	/* ~100khz */
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "okay";
+
+		audio_codec_wm8998: audio-codec-wm8998@1a {
+			compatible = "wlf,wm8998";
+			reg = <0x1a>;
+			interrupts = <7 0 0>;
+			interrupt-parent = <&gpa1>;
+
+			wlf,reset = <&gpg3 5 1>;
+			wlf,ldoena = <&gpv7 4 1>;
+			wlf,micd-ranges = <105 226 /* KEY_MEDIA */
+					270 115 /* KEY_VOLUMEUP */
+					752 114 /* KEY_VOLUMEDOWN */ >;
+			wlf,micd-configs = <0 1 0>;
+			wlf,micbias1 = <2600 0 1 0 0>;
+			wlf,micbias2 = <1800 0 1 0 0>;
+			wlf,micbias3 = <1800 0 1 0 0>;
+			wlf,clk32k-src = <2>; /* MCLK2 */
+			wlf,micd-detect-debounce = <500>;
+			wlf,micd-bias-start-time = <9>;
+			wlf,micd-rate = <5>;
+			wlf,micd-dbtime = <1>;
+			wlf,micd-force-micbias = <1>;
+			wlf,micd-open-circuit-declare = <1>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&wm8998_reset &wm8998_ldoena &wm8998_irq>;
+
+			AVDD-supply = <&ldo34_reg>; /* AVDD18 */
+			LDOVDD-supply = <&ldo37_reg>; /* DVDD18 */
+			DBVDD-supply = <&ldo37_reg>; /* DVDD18 */
+			DBVDD1-supply = <&ldo37_reg>; /* DVDD18 */
+			DBVDD2-supply = <&ldo37_reg>; /* DVDD18 */
+			DBVDD3-supply = <&ldo37_reg>; /* DVDD18 */
+			CPVDD-supply = <&ldo37_reg>; /* DVDD18 */
+			SPKVDD-supply = <&ldo34_reg>; /* AVDD18 */
+			SPKVDDL-supply = <&ldo34_reg>; /* AVDD18 */
+			SPKVDDR-supply = <&ldo34_reg>; /* AVDD18 */
+		};
+	};
+
+	hsi2c@14E50000 {
+		status = "okay";
+		samsung,i2c-sda-delay = <100>;
+		samsung,i2c-max-bus-freq = <400000>;
+
+		audio_codec_es705: audio-codec-es705@3e {
+			compatible = "audience,escore";
+			reg = <0x3e>;
+			adnc,reset-gpio = <&gpg3 2 1>;
+			adnc,gpiob-gpio = <&gpa1 5 0xf>;
+			adnc,wakeup-gpio = <&gpd0 1 1>;
+			adnc,ext_clk_rate = <9>;       /* mclk: 24MHz */
+			adnc,enable_hs_uart_intf = <1>;
+			adnc,hs_uart_baud = <3000000>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&es705_reset &es705_irq &es705_wakeup>;
+		};
+	};
+
+};

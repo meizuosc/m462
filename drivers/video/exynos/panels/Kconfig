@@ -1,0 +1,20 @@
+config DECON_LCD
+	depends on EXYNOS_DECON
+	bool "Select LCD panel driver"
+
+config DECON_LCD_S6E8AA0
+	depends on DECON_LCD && DECON_MIPI_DSI
+	tristate "S6E8AA0 AMOLED HD LCD driver(800 x 1280)"
+
+config DECON_LCD_S6E3FA0
+	depends on DECON_LCD && DECON_MIPI_DSI
+	tristate "S6E3FA0 AMOLED FULL HD LCD driver(1080 x 1920)"
+
+config DECON_LCD_M6X
+	depends on DECON_LCD && DECON_MIPI_DSI
+	tristate "compatible m6x FULL HD LCD driver(1080 x 1800)"
+
+config DECON_LCD_M7X
+	select DECON_MIC
+	depends on DECON_LCD && DECON_MIPI_DSI
+	tristate "m7x WQHD LCD driver(1536 x 2560)"

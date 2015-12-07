@@ -1,0 +1,64 @@
+/*
+ * U-boot uImage source file with multiple FDT blobs
+ *
+ * / o image-tree
+ *   |- description = "image description"
+ *   |- #address-cells = <1>
+ *   |
+ *   o images
+ *   | |
+ *   | o fdt@<board version id> {...}
+ *   | o fdt@<board version id> {...}
+ *   | ...
+ */
+
+/dts-v1/;
+
+/ {
+	description = "MEIZU M76 FDT blobs";
+	#address-cells = <1>;
+
+	images {
+		fdt@0 {
+			description = "m76-fdt";
+			data = /incbin/("./exynos5430-m76-id01.dtb");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash@1 {
+				algo = "sha1";
+			};
+		};
+		fdt@1 {
+			description = "m76-fdt";
+			data = /incbin/("./exynos5430-m76-id01.dtb");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash@1 {
+				algo = "sha1";
+			};
+		};
+		fdt@2 {
+			description = "m76-fdt";
+			data = /incbin/("./exynos5430-m76-id23.dtb");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash@1 {
+				algo = "sha1";
+			};
+		};
+		fdt@3 {
+			description = "m76-fdt";
+			data = /incbin/("./exynos5430-m76-id23.dtb");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash@1 {
+				algo = "sha1";
+			};
+		};
+
+	};
+};

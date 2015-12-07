@@ -1,0 +1,352 @@
+/*
+ * SAMSUNG ESPRESSO5430 board device tree source
+ *
+ * Copyright (c) 2014 Samsung Electronics Co., Ltd.
+ *		http://www.samsung.com
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+*/
+
+#define PIN_CON_INPUT		0
+#define PIN_CON_OUTPUT		1
+
+#define PIN_PULL_NONE		0
+#define PIN_PULL_DOWN		1
+#define PIN_PULL_UP		3
+
+#define PIN_PDN_OUT0		0
+#define PIN_PDN_OUT1		1
+#define PIN_PDN_INPUT		2
+#define PIN_PDN_PREV		3
+
+#define PIN_IN(_pin, _pull)			\
+	_pin {						\
+		samsung,pins = #_pin;			\
+		samsung,pin-function = <0>;		\
+		samsung,pin-pud = <PIN_PULL_ ##_pull>;	\
+	}
+
+#define PIN_OUT(_pin)				\
+	_pin {						\
+		samsung,pins = #_pin;			\
+		samsung,pin-function = <1>;		\
+		samsung,pin-pud = <0>;			\
+	}
+
+#define PIN_OUT_SET(_pin, _val)			\
+	_pin {						\
+		samsung,pins = #_pin;			\
+		samsung,pin-function = <1>;		\
+		samsung,pin-pud = <0>;			\
+		samsung,pin-val	= <_val>;		\
+	}
+
+#define PIN_SLP(_pin, _mode, _pull)				\
+	_pin {							\
+		samsung,pins = #_pin;				\
+		samsung,pin-con-pdn = <PIN_PDN_ ##_mode>;	\
+		samsung,pin-pud-pdn = <PIN_PULL_ ##_pull>;	\
+	}
+/*
+&pinctrl_0 {
+	pinctrl-names = "sleep";
+	pinctrl-0 = <&sleep0>;
+	sleep0: sleep-state {
+		PIN_IN(gpa0-0, DOWN);
+		PIN_IN(gpa0-1, DOWN);
+		PIN_IN(gpa0-2, DOWN);
+		PIN_IN(gpa0-3, DOWN);
+		PIN_IN(gpa0-4, DOWN);
+		PIN_OUT(gpa0-5, DOWN);
+		PIN_IN(gpa0-6, DOWN);
+		PIN_IN(gpa0-7, DOWN);
+
+		PIN_IN(gpa1-0, DOWN);
+		PIN_IN(gpa1-1, DOWN);
+		PIN_IN(gpa1-2, DOWN);
+		PIN_IN(gpa1-3, DOWN);
+		PIN_IN(gpa1-4, DOWN);
+		PIN_IN(gpa1-5, DOWN);
+		PIN_IN(gpa1-6, DOWN);
+		PIN_IN(gpa1-7, DOWN);
+
+		PIN_IN(gpa2-0, DOWN);
+		PIN_IN(gpa2-1, DOWN);
+		PIN_IN(gpa2-2, DOWN);
+		PIN_IN(gpa2-3, DOWN);
+		PIN_IN(gpa2-4, DOWN);
+		PIN_IN(gpa2-5, DOWN);
+		PIN_IN(gpa2-6, DOWN);
+		PIN_IN(gpa2-7, DOWN);
+
+		PIN_IN(gpa3-0, DOWN);
+		PIN_IN(gpa3-1, DOWN);
+		PIN_IN(gpa3-2, DOWN);
+		PIN_IN(gpa3-3, DOWN);
+		PIN_IN(gpa3-4, DOWN);
+		PIN_IN(gpa3-5, DOWN);
+		PIN_IN(gpa3-6, DOWN);
+		PIN_IN(gpa3-7, DOWN);
+	};
+};
+*/
+&pinctrl_1 {
+	pinctrl-names = "sleep";
+	pinctrl-0 = <&sleep1>;
+	sleep1: sleep-state {
+		PIN_SLP(gpz0-0, INPUT, DOWN);	/* MM_I2S_CLK */
+		PIN_SLP(gpz0-1, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpz0-2, INPUT, DOWN);	/* MM_I2S_SYNC */
+		PIN_SLP(gpz0-3, INPUT, DOWN);	/* MM_I2S_DI */
+		PIN_SLP(gpz0-4, INPUT, DOWN);	/* MM_I2S_DO */
+		PIN_SLP(gpz0-5, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpz0-6, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpz1-0, INPUT, NONE);	/* BT_UART_TXD */
+		PIN_SLP(gpz1-1, INPUT, NONE);	/* BT_UART_RXD */
+		PIN_SLP(gpz1-2, INPUT, NONE);	/* BT_UART_CTS */
+		PIN_SLP(gpz1-3, OUT1, NONE);	/* BT_UART_RTS */
+	};
+};
+
+&pinctrl_2 {
+	pinctrl-names = "sleep";
+	pinctrl-0 = <&sleep2>;
+	sleep2: sleep-state {
+		PIN_SLP(gpv6-0, INPUT, UP);	/* WRSTBI */
+		PIN_SLP(gpv6-1, INPUT, DOWN);	/* LEDC1*/
+		PIN_SLP(gpv6-2, INPUT, DOWN);	/* NC */
+	};
+};
+
+&pinctrl_3 {
+	pinctrl-names = "sleep";
+	pinctrl-0 = <&sleep3>;
+	sleep3: sleep-state {
+		PIN_SLP(gph1-0, INPUT, DOWN);	/* NC */
+		PIN_SLP(gph1-1, INPUT, DOWN);	/* NC */
+		PIN_SLP(gph1-2, INPUT, DOWN);	/* NC */
+		PIN_SLP(gph1-3, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpr4-0, INPUT, DOWN);	/* MMC2 NC */
+		PIN_SLP(gpr4-1, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr4-2, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr4-3, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr4-4, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr4-5, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr4-6, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpr0-0, INPUT, DOWN);	/* XMMC0CLK */
+		PIN_SLP(gpr0-1, INPUT, NONE);	/* XMMC0CMD */
+		PIN_SLP(gpr0-2, INPUT, DOWN);	/* XMMC0RDQS */
+		PIN_SLP(gpr0-3, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr0-4, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpr1-0, INPUT, NONE);	/* XMMC0DATA0 */
+		PIN_SLP(gpr1-1, INPUT, NONE);
+		PIN_SLP(gpr1-2, INPUT, NONE);
+		PIN_SLP(gpr1-3, INPUT, NONE);
+		PIN_SLP(gpr1-4, INPUT, NONE);
+		PIN_SLP(gpr1-5, INPUT, NONE);
+		PIN_SLP(gpr1-6, INPUT, NONE);
+		PIN_SLP(gpr1-7, INPUT, NONE);	/* XMMC0DATA7 */
+
+		PIN_SLP(gpr2-0, INPUT, DOWN);	/* WSDCLK */
+		PIN_SLP(gpr2-1, INPUT, NONE);	/* WSDCMD */
+
+		PIN_SLP(gpr3-0, INPUT, NONE);	/* WSD0 */
+		PIN_SLP(gpr3-1, INPUT, NONE);	/* WSD1 */
+		PIN_SLP(gpr3-2, INPUT, NONE);	/* WSD2 */
+		PIN_SLP(gpr3-3, INPUT, NONE);	/* WSD3 */
+		PIN_SLP(gpr3-4, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr3-5, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr3-6, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpr3-7, INPUT, DOWN);	/* NC */
+	};
+};
+
+&pinctrl_4 {
+	pinctrl-names = "sleep";
+	pinctrl-0 = <&sleep4>;
+	sleep4: sleep-state {
+		PIN_SLP(gpj0-0, INPUT, NONE);	/* NFC_SDA */
+		PIN_SLP(gpj0-1, INPUT, NONE);	/* NFC_SCL */
+		PIN_SLP(gpj0-2, INPUT, DOWN);	/* NfC_IRQ */
+	};
+};
+
+&pinctrl_5 {
+	pinctrl-names = "sleep";
+	pinctrl-0 = <&sleep5>;
+	sleep5: sleep-state {
+		PIN_SLP(gpv7-0, INPUT, DOWN);	/* MCLK_EN1(ES9018) */
+		PIN_SLP(gpv7-1, PREV,  NONE);	/* BT_DEV_WAKE */
+		PIN_SLP(gpv7-2, INPUT, DOWN);	/* MCLK_EN(ES9018) */
+		PIN_SLP(gpv7-3, INPUT, DOWN);	/* ENA(ES9018) */
+		PIN_SLP(gpv7-4, PREV,  NONE);	/* WM8998 LDOENA */
+
+		PIN_SLP(gpb0-0, INPUT, NONE);	/* SDA_IR */
+		PIN_SLP(gpb0-1, INPUT, NONE);	/* SCL_IR */
+		PIN_SLP(gpb0-2, INPUT, UP);	/* RESETTH */
+		PIN_SLP(gpb0-3, INPUT, NONE);	/* SCL_NC */
+		PIN_SLP(gpb0-4, INPUT, NONE);	/* SCL_DAC */
+
+		PIN_SLP(gpc0-0, INPUT, DOWN);	/* BCAM_RESET */
+		PIN_SLP(gpc0-1, INPUT, DOWN);	/* FCAM_RESET */
+		PIN_SLP(gpc0-2, INPUT, DOWN);	/* FLASH_STROBE */
+		PIN_SLP(gpc0-3, PREV, NONE);	/* FLASH_TORCH */
+		PIN_SLP(gpc0-4, PREV, NONE);	/* FLASH_HWEN */
+		PIN_SLP(gpc0-5, INPUT, DOWN);	/* XVS */
+		PIN_SLP(gpc0-6, INPUT, NONE);	/* RESETMCU */
+		PIN_SLP(gpc0-7, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpc1-0, INPUT, DOWN);	/* MCU_BOOT */
+		PIN_SLP(gpc1-1, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpc2-0, INPUT, DOWN);	/* BCAM_SDA */
+		PIN_SLP(gpc2-1, INPUT, DOWN);	/* BCAM_SCL */
+		PIN_SLP(gpc2-2, INPUT, DOWN);	/* FCAM_SDA */
+		PIN_SLP(gpc2-3, INPUT, DOWN);	/* FCAM_SCL */
+		PIN_SLP(gpc2-4, INPUT, NONE);	/* FLASH_SDA */
+		PIN_SLP(gpc2-5, INPUT, NONE);	/* FLASH_SCL */
+
+		PIN_SLP(gpc3-0, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpc3-1, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpc3-2, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpc3-3, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpc3-4, PREV,  NONE);	/* AP_WAKE_CP */
+		PIN_SLP(gpc3-5, INPUT, UP);	/* CP_BOOT_ACK */
+		PIN_SLP(gpc3-6, INPUT, UP);	/* CP_HSIC_RDY */
+		PIN_SLP(gpc3-7, PREV,  NONE);	/* AP_HSIC_RDY */
+
+		PIN_SLP(gpg0-0, INPUT, DOWN);	/* TE */
+		PIN_SLP(gpg0-1, INPUT, DOWN);	/* TE */
+
+		PIN_SLP(gpd0-0, INPUT, DOWN);	/* NC_RXD */
+		PIN_SLP(gpd0-1, PREV,  NONE);	/* NC_TXD, WAKEUP */
+		PIN_SLP(gpd0-2, INPUT, NONE);	/* SDA_MUIC */
+		PIN_SLP(gpd0-3, INPUT, NONE);	/* SCL_MUIC */
+
+		PIN_SLP(gpd1-0, INPUT, NONE);	/* GPSRXD */
+		PIN_SLP(gpd1-1, INPUT, NONE);	/* GPSTXD */
+		PIN_SLP(gpd1-2, INPUT, NONE);	/* GPSCTS */
+		PIN_SLP(gpd1-3, OUT1,  NONE); 	/* GPSRTS */
+		PIN_SLP(gpd1-4, INPUT, DOWN);	/* AP_RXD */
+		PIN_SLP(gpd1-5, INPUT, DOWN);	/* AP_TXD */
+
+		PIN_SLP(gpd2-0, INPUT, NONE);	/* SDA_PMIC */
+		PIN_SLP(gpd2-1, INPUT, NONE);	/* SCL_PMIC */
+		PIN_SLP(gpd2-2, INPUT, NONE);	/* SDA_CODEC */
+		PIN_SLP(gpd2-3, INPUT, NONE);	/* SCL_CODEC */
+		PIN_SLP(gpd2-4, INPUT, DOWN);	/* PWMMOTOR */
+		PIN_SLP(gpd2-5, INPUT, DOWN);	/* LCDPWM */
+		PIN_SLP(gpd2-6, INPUT, NONE);	/* SDA_MCU */
+		PIN_SLP(gpd2-7, INPUT, NONE);	/* SCL_MCU */
+
+		PIN_SLP(gpd4-0, INPUT, DOWN);	/* I2SDAC_BCLK */
+		PIN_SLP(gpd4-1, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpd4-2, INPUT, DOWN);	/* I2SDAC_LRCK */
+		PIN_SLP(gpd4-3, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpd4-4, INPUT, DOWN);	/* I2SDAC_DI */
+
+		PIN_SLP(gpd5-0, INPUT, NONE);	/* SPICLK_FP */
+		PIN_SLP(gpd5-1, INPUT, NONE);	/* SPICS_FP */
+		PIN_SLP(gpd5-2, INPUT, DOWN);	/* SPIMISO_FP */
+		PIN_SLP(gpd5-3, INPUT, DOWN);	/* SPIMOSI_FP */
+
+		PIN_SLP(gpd6-0, INPUT, DOWN);	/* SPIMISO_NC */
+		PIN_SLP(gpd6-1, INPUT, DOWN);	/* SPIMOSI_NC */
+		PIN_SLP(gpd6-2, INPUT, DOWN);	/* SPICLK_NFC */
+		PIN_SLP(gpd6-3, INPUT, DOWN);	/* SPICS_NFC */
+		PIN_SLP(gpd6-4, INPUT, DOWN);	/* SPIMISO_NFC */
+		PIN_SLP(gpd6-5, INPUT, DOWN);	/* SPIMOSI_NFC */
+
+		PIN_SLP(gpd7-0, INPUT, DOWN);	/* FCAM_MCLK */
+		PIN_SLP(gpd7-1, INPUT, DOWN);	/* BCAM_MCLK */
+		PIN_SLP(gpd7-2, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpd8-0, INPUT, DOWN);	/* SPICLK_NC */
+		PIN_SLP(gpd8-1, INPUT, NONE);	/* SPICS_NC */
+
+		PIN_SLP(gpf0-0, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpf0-1, INPUT, DOWN);	/* ID4 */
+		PIN_SLP(gpf0-2, INPUT, DOWN);	/* ID1 */
+		PIN_SLP(gpf0-3, INPUT, DOWN);	/* ID2 */
+		PIN_SLP(gpf0-4, INPUT, DOWN);	/* ID3 */
+		PIN_SLP(gpf0-5, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpf0-6, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpf0-7, INPUT, NONE);	/* XOMCCI */
+
+		PIN_SLP(gpf1-0, INPUT, DOWN);	/* LCDBKEN */
+		PIN_SLP(gpf1-1, INPUT, NONE);	/* SDA_CHG */
+		PIN_SLP(gpf1-2, INPUT, NONE);	/* SCL_CHG */
+		PIN_SLP(gpf1-3, INPUT, DOWN);	/* LEDC5 */
+		PIN_SLP(gpf1-4, INPUT, DOWN);	/* LEDC2 */
+		PIN_SLP(gpf1-5, INPUT, DOWN);	/* LEDC3 */
+		PIN_SLP(gpf1-6, INPUT, DOWN);	/* LEDC4 */
+		PIN_SLP(gpf1-7, PREV,  NONE);	/* NFC_RST_N */
+
+		PIN_SLP(gpf2-0, INPUT, DOWN);	/* LEDC6 */
+		PIN_SLP(gpf2-1, INPUT, DOWN);	/* LCDID */
+		PIN_SLP(gpf2-2, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpf2-3, INPUT, DOWN);	/* NC */
+
+		PIN_SLP(gpf3-0, INPUT, DOWN);	/* ENVGH */
+		PIN_SLP(gpf3-1, INPUT, DOWN);	/* ENVGL */
+		PIN_SLP(gpf3-2, INPUT, NONE);	/* LED_SCL */
+		PIN_SLP(gpf3-3, PREV,  NONE);	/* NFC_RESET */
+		PIN_SLP(gpf3-4, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpf3-5, INPUT, DOWN);	/* XBOOTLDO */
+
+		PIN_SLP(gpf4-0, INPUT, DOWN);	/* RESET_FP */
+		PIN_SLP(gpf4-1, PREV,  NONE);	/* CP_PWR_ON */
+		PIN_SLP(gpf4-2, INPUT, DOWN);	/* MOTOR_EN */
+		PIN_SLP(gpf4-3, PREV,  NONE);	/* AP_RESET_CP */
+		PIN_SLP(gpf4-4, PREV,  NONE);	/* NFC_DL_REQ */
+		PIN_SLP(gpf4-5, INPUT, NONE);	/* MOTOR_SCL */
+		PIN_SLP(gpf4-6, INPUT, DOWN);	/* LED_EN */
+		PIN_SLP(gpf4-7, INPUT, NONE);	/* MOTOR_SDA */
+
+		PIN_SLP(gpf5-0, INPUT, DOWN);	/* LRESET */
+		PIN_SLP(gpf5-1, INPUT, NONE);	/* SCL_LCDBIAS */
+		PIN_SLP(gpf5-2, INPUT, NONE);	/* LCDBLSDA */
+		PIN_SLP(gpf5-3, INPUT, NONE);	/* LCDBLSCL*
+		PIN_SLP(gpf5-4, INPUT, NONE);	/* SDA_LCDBIAS */
+		PIN_SLP(gpf5-5, INPUT, NONE);	/* LED_SDA */
+		PIN_SLP(gpf5-6, INPUT, DOWN);	/* LCDN5VEN */
+		PIN_SLP(gpf5-7, INPUT, DOWN);	/* LCD5VEN */
+
+		PIN_SLP(gpg1-0, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpg1-1, INPUT, NONE);	/* SCL_APA */
+		PIN_SLP(gpg1-2, INPUT, NONE);	/* SDA_APA */
+		PIN_SLP(gpg1-3, INPUT, DOWN);	/* NC */
+		PIN_SLP(gpg1-4, PREV,  NONE);	/* TFA9890 RESET */
+
+		PIN_SLP(gpg2-0, INPUT, DOWN);	/* DAC_RESET */
+		PIN_SLP(gpg2-1, INPUT, DOWN);	/* MUTE */
+		PIN_SLP(gpg2-2, INPUT, NONE);	/* SDA_DAC */
+		PIN_SLP(gpg2-3, INPUT, DOWN);	/* MCU_BUSY */
+		PIN_SLP(gpg2-4, INPUT, NONE);	/* SDA_NC */
+
+		PIN_SLP(gpg3-0, PREV,  NONE); 	/* GPS_POWERON */
+		PIN_SLP(gpg3-1, INPUT, DOWN);	/* OP_EN(ES9018) */
+		PIN_SLP(gpg3-2, PREV,  NONE);	/* ES705 RESET */
+		PIN_SLP(gpg3-3, PREV,  NONE);	/* WL_REG_ON */
+		PIN_SLP(gpg3-4, PREV,  NONE);	/* BT_REG_ON */
+		PIN_SLP(gpg3-5, PREV,  NONE);	/* WM8998 RESET */
+		PIN_SLP(gpg3-6, INPUT, DOWN);	/* SLEEP_MCU */
+		PIN_SLP(gpg3-7, INPUT, DOWN);	/* AP_IRON */
+	};
+};
+
+&pinctrl_6 {
+	pinctrl-names = "sleep";
+	pinctrl-0 = <&sleep6>;
+	sleep6: sleep-state {
+		PIN_SLP(gpj1-0, INPUT, NONE);	/* SDA_TOUCH */
+		PIN_SLP(gpj1-1, INPUT, NONE);	/* SCL_TOUCH */
+		PIN_SLP(gpj1-2, INPUT, DOWN);	/* WKUP_MCU */
+	};
+};
